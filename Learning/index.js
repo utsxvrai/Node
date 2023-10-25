@@ -1,12 +1,18 @@
 const Joi = require('joi')
 const logger = require('./logger')
 const express = require('express');
+const helmet = require('helmet');  
+const morgan = require('morgan');  // HTTP request logger middleware for node.js
 const app = express();
 
 app.use(express.json());
-
 app.use(express.urlencoded( { extended: true } ));
 app.use(express.static('public'));
+app.use(helmet());
+app.use(morgan('tiny'));
+
+
+
 app.use(logger);
 
 const array = [
